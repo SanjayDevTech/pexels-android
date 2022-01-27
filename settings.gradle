@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Pexels Android"
-include ':library'
+include ':core'
+include ':sample'

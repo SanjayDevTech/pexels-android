@@ -14,15 +14,11 @@
 
 - Add the below implementation
 ```gradle
-    implementation 'com.github.CodeIt-With-Coffee:pexels-android:<tag>'
+    implementation 'com.github.CodeIt-With-Coffee.pexels-android:<tag>'
 ```
 In the place of &lt;tag&gt; you can replace the branch-commitid or any releases
 
-Eg:
-
-a. main-SNAPSHOT (fetches the latest commit from main branch)
-
-b. 1.0.0
+Eg: 0.0.1
 
 ### Plans
 - Simple API

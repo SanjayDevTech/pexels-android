@@ -31,6 +31,18 @@ android {
         jvmTarget = '1.8'
     }
 }
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = 'com.github.CodeIt-With-Coffee.pexels-android'
+                artifactId = 'core'
+
+                from components.release
+            }
+        }
+    }
+}
 
 dependencies {
 

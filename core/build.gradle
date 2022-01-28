@@ -4,8 +4,6 @@ plugins {
     id 'maven-publish'
 }
 
-group = "com.github.CodeIt-With-Coffee"
-
 android {
     compileSdk 31
 
@@ -35,8 +33,9 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                groupId = 'com.github.CodeIt-With-Coffee.pexels-android'
-                artifactId = 'core'
+                groupId = 'com.github.CodeIt-With-Coffee'
+                artifactId = 'pexels-android'
+                version = project.version
                 from components.release
             }
         }

@@ -1,14 +1,17 @@
 package com.pexels.android
 
+import com.pexels.android.network.PexelsService
+import com.pexels.android.network.ServiceLocator
 import com.pexels.android.operation.PexelsOperation
 import com.pexels.android.operation.PexelsOperationImpl
+import okhttp3.HttpUrl
 
 /**
  * Main objective of this class is to create a Client
  */
 object Pexels {
 
-    private val operation: PexelsOperation = PexelsOperationImpl()
+    private val service: PexelsService = ServiceLocator.pexelsService(HttpUrl.get("https://api.pexels.com"))
 
     /**
      * Creates a [PexelsClient] with apiKey provided
@@ -20,5 +23,11 @@ object Pexels {
     @JvmStatic
     fun createClient(
         apiKey: String,
-    ) = PexelsClient(apiKey = apiKey, operation = operation)
+    ): PexelsClient {
+        val operation = PexelsOperationImpl(
+            apiKey,
+            service,
+        )
+        return PexelsClient(operation = operation)
+    }
 }

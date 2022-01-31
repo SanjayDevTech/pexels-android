@@ -1,5 +1,7 @@
 package com.pexels.android.model
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * PhotoResource
  *
@@ -34,16 +36,19 @@ data class PhotoResource(
     /**
      * The URL of the photographer's Pexels profile.
      */
+    @SerializedName("photographer_url")
     val photographerUrl: String,
 
     /**
      * The id of the photographer.
      */
+    @SerializedName("photographer_id")
     val photographerId: Int,
 
     /**
      * The average color of the photo. Useful for a placeholder while the image loads.
      */
+    @SerializedName("avg_color")
     val avgColor: String,
 
     /**

@@ -12,9 +12,10 @@ import com.pexels.android.model.param.Locale
 import com.pexels.android.model.param.Orientation
 import com.pexels.android.model.param.Size
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class MainActivity : AppCompatActivity() {
-    private val apiKey: String = "Hello api key"
+    private val apiKey: String = "563492ad6f917000010000013b68d3e217514ab7a4185f3a741ba48c"
     private val pexelsClient: PexelsClient =
         Pexels.createClient(apiKey = apiKey)
 
@@ -37,15 +38,17 @@ class MainActivity : AppCompatActivity() {
                     page = 1, // Try changing it to below 1
                     perPage = 15, // Try changing it to below 15 or above 80
                 )
+                Log.d(TAG, "Start")
                 photosResponse.photos.forEachIndexed { i, photo ->
                     Log.d(TAG, "PhotoId #$i: ${photo.id}")
                 }
+                Log.d(TAG, "Done")
             } catch (e: IllegalArgumentException) {
                 Log.d(TAG, "Parameter validation exception", e)
-            } catch (e: PexelsResponseException) {
-                Log.d(TAG, "Pexels API exception", e)
+            } catch (e: HttpException) {
+                Log.d(TAG, "Server response is not success exception", e)
             } catch (e: Exception) {
-                Log.d(TAG, "Exception", e)
+                Log.d(TAG, "Network Exception", e)
             }
         }
     }

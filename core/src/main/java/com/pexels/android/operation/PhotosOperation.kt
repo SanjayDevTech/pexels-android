@@ -15,7 +15,6 @@ import com.pexels.android.model.response.ListPhotosResponse
  */
 interface PhotosOperation {
     suspend fun searchForPhotos(
-        apiKey: String,
         query: String,
         orientation: Orientation? = null,
         size: Size? = null,
@@ -26,13 +25,11 @@ interface PhotosOperation {
     ): ListPhotosResponse
 
     suspend fun curatedPhotos(
-        apiKey: String,
         page: Int = 1,
         perPage: Int = 15,
     ): ListPhotosResponse
 
     suspend fun getPhoto(
-        apiKey: String,
         id: Int,
     ): PhotoResource
 }

@@ -1,7 +1,7 @@
 package com.pexels.android
 
-import com.pexels.android.exception.PexelsResponseException
-import com.pexels.android.model.*
+import com.pexels.android.model.PhotoResource
+import com.pexels.android.model.param.Color
 import com.pexels.android.model.param.Locale
 import com.pexels.android.model.param.Orientation
 import com.pexels.android.model.param.Size
@@ -12,19 +12,14 @@ import com.pexels.android.model.task.OnSuccessListener
 import com.pexels.android.model.task.PexelsTask
 import com.pexels.android.operation.PexelsOperation
 import kotlinx.coroutines.*
-import java.io.IOException
-//import java.io.IOException
-import kotlin.jvm.Throws
+import retrofit2.HttpException
 
 /**
  * Client Class for Pexels API
- * @param apiKey
- * Get the apiKey from [API Key](https://www.pexels.com/api/new/)
  * @param operation
  * Instance of [PexelsOperation] to make the testing easier (Dependency Injection).
  */
 class PexelsClient (
-    private val apiKey: String,
     private val operation: PexelsOperation,
 ) {
     private val job = Job()
@@ -67,13 +62,13 @@ class PexelsClient (
      * If any of the params were invalid
      * @throws Exception
      * If there is any errors from network
-     * @throws PexelsResponseException
+     * @throws HttpException
      * Response code other than 200
      *
      * @return [ListPhotosResponse]
      * Search response
      */
-    @Throws(IllegalArgumentException::class, Exception::class, PexelsResponseException::class)
+    @Throws(IllegalArgumentException::class, Exception::class, HttpException::class)
     suspend fun searchForPhotos(
         query: String,
         orientation: Orientation? = null,
@@ -87,9 +82,42 @@ class PexelsClient (
         validatePage(page)
         validatePerPage(perPage)
         return operation.searchForPhotos(
-            apiKey,
             query, orientation, size, color, locale, page, perPage,
         )
+    }
+
+    private fun <T> executeCodeCallback(code: suspend  () -> T): PexelsTask<T> {
+        var onCompleteListener: OnCompleteListener<T>? = null
+        var onSuccessListener: OnSuccessListener<T>? = null
+        var onFailureListener: OnFailureListener? = null
+        val task = object : PexelsTask<T> {
+            override fun setOnCompleteListener(cb: OnCompleteListener<T>) {
+                onCompleteListener = cb
+            }
+
+            override fun setOnSuccessListener(cb: OnSuccessListener<T>) {
+                onSuccessListener = cb
+            }
+
+            override fun setOnFailureListener(cb: OnFailureListener) {
+                onFailureListener = cb
+            }
+
+            override fun cancel() {
+                job.cancel()
+            }
+        }
+        scope.launch {
+            try {
+                val result = code()
+                onSuccessListener?.onSuccess(result)
+                onCompleteListener?.onComplete(result, null)
+            } catch (e: Exception) {
+                onFailureListener?.onFailure(e)
+                onCompleteListener?.onComplete(null, e)
+            }
+        }
+        return task
     }
 
     @JvmOverloads
@@ -102,40 +130,11 @@ class PexelsClient (
         page: Int = 1,
         perPage: Int = 15,
     ): PexelsTask<ListPhotosResponse> {
-        var onCompleteListener: OnCompleteListener<ListPhotosResponse>? = null
-        var onSuccessListener: OnSuccessListener<ListPhotosResponse>? = null
-        var onFailureListener: OnFailureListener? = null
-        val task = object : PexelsTask<ListPhotosResponse> {
-            override fun setOnCompleteListener(cb: OnCompleteListener<ListPhotosResponse>) {
-                onCompleteListener = cb
-            }
-
-            override fun setOnSuccessListener(cb: OnSuccessListener<ListPhotosResponse>) {
-                onSuccessListener = cb
-            }
-
-            override fun setOnFailureListener(cb: OnFailureListener) {
-                onFailureListener = cb
-            }
-
-            override fun cancel() {
-                job.cancel()
-            }
-
+        return executeCodeCallback {
+            searchForPhotos(
+                query, orientation, size, color, locale, page, perPage
+            )
         }
-        scope.launch {
-            try {
-                val result = searchForPhotos(
-                    query, orientation, size, color, locale, page, perPage
-                )
-                onSuccessListener?.onSuccess(result)
-                onCompleteListener?.onComplete(result, null)
-            } catch (e: Exception) {
-                onFailureListener?.onFailure(e)
-                onCompleteListener?.onComplete(null, e)
-            }
-        }
-        return task
     }
 
     /**
@@ -152,13 +151,13 @@ class PexelsClient (
      * If any of the params were invalid
      * @throws Exception
      * If there is any errors from network
-     * @throws PexelsResponseException
+     * @throws HttpException
      * Response code other than 200
      *
      * @return [ListPhotosResponse]
      * Curated response
      */
-    @Throws(IllegalArgumentException::class, Exception::class, PexelsResponseException::class)
+    @Throws(IllegalArgumentException::class, Exception::class, HttpException::class)
     suspend fun curatedPhotos(
         page: Int = 1,
         perPage: Int = 15,
@@ -166,9 +165,18 @@ class PexelsClient (
         validatePage(page)
         validatePerPage(perPage)
         return operation.curatedPhotos(
-            apiKey,
             page, perPage,
         )
+    }
+
+    @JvmOverloads
+    fun curatedPhotosCallback(
+        page: Int = 1,
+        perPage: Int = 15,
+    ): PexelsTask<ListPhotosResponse> {
+        return executeCodeCallback {
+            curatedPhotos(page, perPage)
+        }
     }
 
     /**
@@ -178,16 +186,28 @@ class PexelsClient (
      * @param id
      * The id of the photo you are requesting.
      *
+     * @throws Exception
+     * If there is any errors from network
+     * @throws HttpException
+     * Response code other than 200
+     *
      * @return [PhotoResource]
      */
-    @Throws(IOException::class, PexelsResponseException::class)
+    @Throws(Exception::class, HttpException::class)
     suspend fun getPhoto(
         id: Int,
     ): PhotoResource {
         return operation.getPhoto(
-            apiKey,
             id,
         )
+    }
+
+    fun getPhotoCallback(
+        id: Int,
+    ): PexelsTask<PhotoResource> {
+        return executeCodeCallback {
+            getPhoto(id)
+        }
     }
 
     private fun validateQuery(query: String) {

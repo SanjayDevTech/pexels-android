@@ -24,7 +24,7 @@ object Pexels {
     fun createClient(
         apiKey: String,
     ): PexelsClient {
-        val operation = PexelsOperationImpl(
+        val operation: PexelsOperation = PexelsOperationImpl(
             apiKey,
             service,
         )

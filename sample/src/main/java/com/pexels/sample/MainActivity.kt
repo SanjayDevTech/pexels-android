@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.pexels.android.Pexels
 import com.pexels.android.PexelsClient
-import com.pexels.android.exception.PexelsResponseException
 import com.pexels.android.model.param.Color
 import com.pexels.android.model.param.Locale
 import com.pexels.android.model.param.Orientation

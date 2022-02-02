@@ -25,7 +25,7 @@ class PexelsOperationImplTest {
         mockWebServer = MockWebServer()
         mockWebServer.start(8080)
         val pexelsService = ServiceLocator.pexelsService(mockWebServer.url("/"))
-        pexelsOperation = PexelsOperationImpl(pexelsService)
+        pexelsOperation = PexelsOperationImpl("", pexelsService)
     }
 
     @After
@@ -39,11 +39,8 @@ class PexelsOperationImplTest {
             .setResponseCode(500)
         mockWebServer.enqueue(response)
         assertExceptionSuspend {
-            val listPhotosResponse = pexelsOperation.searchForPhotos(
-                apiKey = "",
+            pexelsOperation.searchForPhotos(
                 query = "Space",
-                page = 1,
-                perPage = 20,
             )
         }.isException(HttpException::class.java)
     }
@@ -54,11 +51,8 @@ class PexelsOperationImplTest {
             .setResponseCode(400)
         mockWebServer.enqueue(response)
         assertExceptionSuspend {
-            val listPhotosResponse = pexelsOperation.searchForPhotos(
-                apiKey = "",
+            pexelsOperation.searchForPhotos(
                 query = "Space",
-                page = 1,
-                perPage = 20,
             )
         }.isException(HttpException::class.java)
     }
@@ -69,11 +63,8 @@ class PexelsOperationImplTest {
             .setResponseCode(300)
         mockWebServer.enqueue(response)
         assertExceptionSuspend {
-            val listPhotosResponse = pexelsOperation.searchForPhotos(
-                apiKey = "",
+            pexelsOperation.searchForPhotos(
                 query = "Space",
-                page = 1,
-                perPage = 20,
             )
         }.isException(HttpException::class.java)
     }
@@ -85,11 +76,8 @@ class PexelsOperationImplTest {
             .setBody("{}")
         mockWebServer.enqueue(response)
         assertExceptionSuspend {
-            val listPhotosResponse = pexelsOperation.searchForPhotos(
-                apiKey = "",
+            pexelsOperation.searchForPhotos(
                 query = "Space",
-                page = 1,
-                perPage = 20,
             )
         }.isNoException()
     }
@@ -102,11 +90,8 @@ class PexelsOperationImplTest {
         mockWebServer.enqueue(response)
         mockWebServer.shutdown()
         assertExceptionSuspend {
-            val listPhotosResponse = pexelsOperation.searchForPhotos(
-                apiKey = "",
+            pexelsOperation.searchForPhotos(
                 query = "Space",
-                page = 1,
-                perPage = 20,
             )
         }.isException(Exception::class.java)
     }

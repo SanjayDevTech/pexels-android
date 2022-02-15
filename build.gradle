@@ -8,7 +8,7 @@ plugins {
 
 allprojects {
     group = "com.github.CodeIt-With-Coffee"
-    version = '0.0.1'
+    version = '1.0.0'
 }
 
 task clean(type: Delete) {

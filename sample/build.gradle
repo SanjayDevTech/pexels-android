@@ -5,8 +5,12 @@ plugins {
 
 static def getApiKey(){
     def props = new Properties()
-    props.load(new FileInputStream(new File('secrets.properties')))
-    return props['PEXELS_API_KEY']
+    try {
+        props.load(new FileInputStream(new File('secrets.properties')))
+        return props['PEXELS_API_KEY']
+    } catch(ignored) {
+        return ""
+    }
 }
 
 android {

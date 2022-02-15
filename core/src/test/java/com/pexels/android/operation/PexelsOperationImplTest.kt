@@ -25,7 +25,7 @@ class PexelsOperationImplTest {
         mockWebServer = MockWebServer()
         mockWebServer.start(8080)
         val pexelsService = ServiceLocator.pexelsService(mockWebServer.url("/"))
-        pexelsOperation = PexelsOperationImpl(pexelsService)
+        pexelsOperation = PexelsOperationImpl("", pexelsService)
     }
 
     @After
@@ -40,7 +40,6 @@ class PexelsOperationImplTest {
         mockWebServer.enqueue(response)
         assertExceptionSuspend {
             val listPhotosResponse = pexelsOperation.searchForPhotos(
-                apiKey = "",
                 query = "Space",
                 page = 1,
                 perPage = 20,
@@ -55,7 +54,6 @@ class PexelsOperationImplTest {
         mockWebServer.enqueue(response)
         assertExceptionSuspend {
             val listPhotosResponse = pexelsOperation.searchForPhotos(
-                apiKey = "",
                 query = "Space",
                 page = 1,
                 perPage = 20,
@@ -70,7 +68,6 @@ class PexelsOperationImplTest {
         mockWebServer.enqueue(response)
         assertExceptionSuspend {
             val listPhotosResponse = pexelsOperation.searchForPhotos(
-                apiKey = "",
                 query = "Space",
                 page = 1,
                 perPage = 20,
@@ -86,7 +83,6 @@ class PexelsOperationImplTest {
         mockWebServer.enqueue(response)
         assertExceptionSuspend {
             val listPhotosResponse = pexelsOperation.searchForPhotos(
-                apiKey = "",
                 query = "Space",
                 page = 1,
                 perPage = 20,
@@ -103,7 +99,6 @@ class PexelsOperationImplTest {
         mockWebServer.shutdown()
         assertExceptionSuspend {
             val listPhotosResponse = pexelsOperation.searchForPhotos(
-                apiKey = "",
                 query = "Space",
                 page = 1,
                 perPage = 20,

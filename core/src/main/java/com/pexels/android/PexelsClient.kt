@@ -1,15 +1,17 @@
 package com.pexels.android
 
-import com.pexels.android.model.PhotoResource
+import com.pexels.android.model.photo.PhotoResource
 import com.pexels.android.model.param.Color
 import com.pexels.android.model.param.Locale
 import com.pexels.android.model.param.Orientation
 import com.pexels.android.model.param.Size
-import com.pexels.android.model.response.ListPhotosResponse
+import com.pexels.android.model.photo.ListPhotosResponse
 import com.pexels.android.model.task.OnCompleteListener
 import com.pexels.android.model.task.OnFailureListener
 import com.pexels.android.model.task.OnSuccessListener
 import com.pexels.android.model.task.PexelsTask
+import com.pexels.android.model.video.ListVideosResponse
+import com.pexels.android.model.video.VideoResource
 import com.pexels.android.operation.PexelsOperation
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -25,6 +27,7 @@ class PexelsClient (
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.Main) + job
 
+    // PHOTO STARTS
     /**
      * Search for pexels photos with provided query string.
      *
@@ -75,8 +78,8 @@ class PexelsClient (
         size: Size? = null,
         color: String? = null,
         locale: Locale? = null,
-        page: Int = 1,
-        perPage: Int = 15,
+        page: Int? = null,
+        perPage: Int? = null,
     ): ListPhotosResponse {
         validateQuery(query)
         validatePage(page)
@@ -86,40 +89,6 @@ class PexelsClient (
         )
     }
 
-    private fun <T> executeCodeCallback(code: suspend  () -> T): PexelsTask<T> {
-        var onCompleteListener: OnCompleteListener<T>? = null
-        var onSuccessListener: OnSuccessListener<T>? = null
-        var onFailureListener: OnFailureListener? = null
-        val task = object : PexelsTask<T> {
-            override fun setOnCompleteListener(cb: OnCompleteListener<T>) {
-                onCompleteListener = cb
-            }
-
-            override fun setOnSuccessListener(cb: OnSuccessListener<T>) {
-                onSuccessListener = cb
-            }
-
-            override fun setOnFailureListener(cb: OnFailureListener) {
-                onFailureListener = cb
-            }
-
-            override fun cancel() {
-                job.cancel()
-            }
-        }
-        scope.launch {
-            try {
-                val result = code()
-                onSuccessListener?.onSuccess(result)
-                onCompleteListener?.onComplete(result, null)
-            } catch (e: Exception) {
-                onFailureListener?.onFailure(e)
-                onCompleteListener?.onComplete(null, e)
-            }
-        }
-        return task
-    }
-
     @JvmOverloads
     fun searchForPhotosCallback(
         query: String,
@@ -127,8 +96,8 @@ class PexelsClient (
         size: Size? = null,
         color: String? = null,
         locale: Locale? = null,
-        page: Int = 1,
-        perPage: Int = 15,
+        page: Int? = null,
+        perPage: Int? = null,
     ): PexelsTask<ListPhotosResponse> {
         return executeCodeCallback {
             searchForPhotos(
@@ -159,8 +128,8 @@ class PexelsClient (
      */
     @Throws(IllegalArgumentException::class, Exception::class, HttpException::class)
     suspend fun curatedPhotos(
-        page: Int = 1,
-        perPage: Int = 15,
+        page: Int? = null,
+        perPage: Int? = null,
     ): ListPhotosResponse {
         validatePage(page)
         validatePerPage(perPage)
@@ -171,8 +140,8 @@ class PexelsClient (
 
     @JvmOverloads
     fun curatedPhotosCallback(
-        page: Int = 1,
-        perPage: Int = 15,
+        page: Int? = null,
+        perPage: Int? = null,
     ): PexelsTask<ListPhotosResponse> {
         return executeCodeCallback {
             curatedPhotos(page, perPage)
@@ -209,6 +178,211 @@ class PexelsClient (
             getPhoto(id)
         }
     }
+    // PHOTO ENDS
+
+    // VIDEO STARTS
+    /**
+     * Search for pexels videos with provided query string.
+     *
+     * This endpoint enables you to search Pexels for any topic that you would like.
+     * For example your query could be something broad like `Nature`, `Tigers`, `People`.
+     * Or it could be something specific like `Group of people working`.
+     *
+     * @param query
+     * The search query. `Ocean`, `Tigers`, `Pears`, etc.
+     * @param orientation
+     * Desired photo orientation. The current supported orientations are:
+     * [Orientation.LANDSCAPE], [Orientation.PORTRAIT] or [Orientation.SQUARE].
+     * @param size
+     * Minimum photo size. The current supported sizes are:
+     * [Size.LARGE], [Size.MEDIUM] or [Size.SMALL].
+     * @param color
+     * Desired photo color.Supported colors:
+     * [Color.RED], [Color.ORANGE], [Color.YELLOW], [Color.GREEN], [Color.TURQUOISE],
+     * [Color.BLUE], [Color.VIOLET], [Color.PINK], [Color.BROWN], [Color.BLACK],
+     * [Color.GRAY], [Color.WHITE]
+     * or any hexadecimal color code (eg. `#ffffff`).
+     * @param locale
+     * The locale of the search you are performing. The current supported locales are:
+     * [Locale.EN_US] [Locale.PT_BR] [Locale.ES_ES] [Locale.CA_ES] [Locale.DE_DE] [Locale.IT_IT]
+     * [Locale.FR_FR] [Locale.SV_SE] [Locale.ID_ID] [Locale.PL_PL] [Locale.JA_JP] [Locale.ZH_TW]
+     * [Locale.ZH_CN] [Locale.KO_KR] [Locale.TH_TH] [Locale.NL_NL] [Locale.HU_HU] [Locale.VI_VN]
+     * [Locale.CS_CZ] [Locale.DA_DK] [Locale.FI_FI] [Locale.UK_UA] [Locale.EL_GR] [Locale.RO_RO]
+     * [Locale.NB_NO] [Locale.SK_SK] [Locale.TR_TR] [Locale.RU_RU].
+     * @param page
+     * The page number you are requesting. `Default: 1`
+     * @param perPage
+     * The number of results you are requesting per page. `Default: 15` `Max: 80`
+     *
+     * @throws IllegalArgumentException
+     * If any of the params were invalid
+     * @throws Exception
+     * If there is any errors from network
+     * @throws HttpException
+     * Response code other than 200
+     *
+     * @return [ListVideosResponse]
+     * Search response
+     */
+    @Throws(IllegalArgumentException::class, Exception::class, HttpException::class)
+    suspend fun searchForVideos(
+        query: String,
+        orientation: Orientation? = null,
+        size: Size? = null,
+        color: String? = null,
+        locale: Locale? = null,
+        page: Int? = null,
+        perPage: Int? = null,
+    ): ListVideosResponse {
+        validateQuery(query)
+        validatePage(page)
+        validatePerPage(perPage)
+        return operation.searchForVideos(
+            query, orientation, size, color, locale, page, perPage,
+        )
+    }
+
+    @JvmOverloads
+    fun searchForVideosCallback(
+        query: String,
+        orientation: Orientation? = null,
+        size: Size? = null,
+        color: String? = null,
+        locale: Locale? = null,
+        page: Int? = null,
+        perPage: Int? = null,
+    ): PexelsTask<ListVideosResponse> {
+        return executeCodeCallback {
+            searchForVideos(
+                query, orientation, size, color, locale, page, perPage
+            )
+        }
+    }
+
+    /**
+     * This endpoint enables you to receive the current popular Pexels videos.
+     *
+     * @param page
+     * The page number you are requesting. `Default: 1`
+     * @param perPage
+     * The number of results you are requesting per page. `Default: 15` `Max: 80`
+     * @param minWidth
+     * The minimum width in pixels of the returned videos.
+     * @param minHeight
+     * The minimum height in pixels of the returned videos.
+     * @param minDuration
+     * The minimum duration in seconds of the returned videos.
+     * @param maxDuration
+     * The maximum duration in seconds of the returned videos.
+     *
+     * @throws IllegalArgumentException
+     * If any of the params were invalid
+     * @throws Exception
+     * If there is any errors from network
+     * @throws HttpException
+     * Response code other than 200
+     *
+     * @return [ListVideosResponse]
+     * Popular response
+     */
+    @Throws(IllegalArgumentException::class, Exception::class, HttpException::class)
+    suspend fun popularVideos(
+        page: Int? = null,
+        perPage: Int? = null,
+        minWidth: Int? = null,
+        minHeight: Int? = null,
+        minDuration: Int? = null,
+        maxDuration: Int? = null,
+    ): ListVideosResponse {
+        validatePage(page)
+        validatePerPage(perPage)
+        return operation.popularVideos(
+            page, perPage,
+        )
+    }
+
+    @JvmOverloads
+    fun popularVideosCallback(
+        page: Int? = null,
+        perPage: Int? = null,
+        minWidth: Int? = null,
+        minHeight: Int? = null,
+        minDuration: Int? = null,
+        maxDuration: Int? = null,
+    ): PexelsTask<ListVideosResponse> {
+        return executeCodeCallback {
+            popularVideos(page, perPage, minWidth, minHeight, minDuration, maxDuration)
+        }
+    }
+
+    /**
+     * Fetch a single Video
+     * Retrieve a specific [VideoResource] from its id.
+     *
+     * @param id
+     * The id of the video you are requesting.
+     *
+     * @throws Exception
+     * If there is any errors from network
+     * @throws HttpException
+     * Response code other than 200
+     *
+     * @return [VideoResource]
+     */
+    @Throws(Exception::class, HttpException::class)
+    suspend fun getVideo(
+        id: Int,
+    ): VideoResource {
+        return operation.getVideo(
+            id,
+        )
+    }
+
+    fun getVideoCallback(
+        id: Int,
+    ): PexelsTask<VideoResource> {
+        return executeCodeCallback {
+            getVideo(id)
+        }
+    }
+    // VIDEO ENDS
+
+    private fun <T> executeCodeCallback(code: suspend  () -> T): PexelsTask<T> {
+        var onCompleteListener: OnCompleteListener<T>? = null
+        var onSuccessListener: OnSuccessListener<T>? = null
+        var onFailureListener: OnFailureListener? = null
+        val task = object : PexelsTask<T> {
+            override fun setOnCompleteListener(cb: OnCompleteListener<T>): PexelsTask<T> {
+                onCompleteListener = cb
+                return this
+            }
+
+            override fun setOnSuccessListener(cb: OnSuccessListener<T>): PexelsTask<T> {
+                onSuccessListener = cb
+                return this
+            }
+
+            override fun setOnFailureListener(cb: OnFailureListener): PexelsTask<T> {
+                onFailureListener = cb
+                return this
+            }
+
+            override fun cancel() {
+                job.cancel()
+            }
+        }
+        scope.launch {
+            try {
+                val result = code()
+                onSuccessListener?.onSuccess(result)
+                onCompleteListener?.onComplete(result, null)
+            } catch (e: Exception) {
+                onFailureListener?.onFailure(e)
+                onCompleteListener?.onComplete(null, e)
+            }
+        }
+        return task
+    }
 
     private fun validateQuery(query: String) {
         if (query.isBlank())
@@ -217,14 +391,16 @@ class PexelsClient (
             )
     }
 
-    private fun validatePage(page: Int) {
+    private fun validatePage(page: Int?) {
+        if (page == null) return
         if (page < 1)
             throw IllegalArgumentException(
                 "page number should be greater than 0. Actual page number we got: $page"
             )
     }
 
-    private fun validatePerPage(perPage: Int) {
+    private fun validatePerPage(perPage: Int?) {
+        if (perPage == null) return
         if (perPage !in 15 until 81)
             throw IllegalArgumentException(
                 "perPage should be in range 15 to 80(inclusive). Actual perPage we got: $perPage"

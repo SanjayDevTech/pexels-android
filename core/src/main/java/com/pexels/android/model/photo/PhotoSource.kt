@@ -1,4 +1,4 @@
-package com.pexels.android.model
+package com.pexels.android.model.photo
 
 /**
  * PhotoSource

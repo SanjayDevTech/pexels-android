@@ -1,7 +1,14 @@
 package com.pexels.android.model.param
 
-enum class Size(val displayName: String) {
-    LARGE("24MP"),
-    MEDIUM("12MP"),
-    SMALL("4MP"),
+import com.google.gson.annotations.SerializedName
+
+enum class Size {
+    @SerializedName("large")
+    LARGE,
+
+    @SerializedName("medium")
+    MEDIUM,
+
+    @SerializedName("small")
+    SMALL,
 }

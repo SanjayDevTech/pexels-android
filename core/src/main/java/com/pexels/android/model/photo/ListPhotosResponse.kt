@@ -1,7 +1,7 @@
-package com.pexels.android.model.response
+package com.pexels.android.model.photo
 
 import com.google.gson.annotations.SerializedName
-import com.pexels.android.model.PhotoResource
+import com.pexels.android.model.photo.PhotoResource
 
 /**
  * Response Object to hold data about a Pexels API List photos response

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/photos_nav"
+    app:startDestination="@id/curatedPhotos">
+
+    <fragment
+        android:id="@+id/searchPhotos"
+        android:name="com.pexels.sample.photo.SearchPhotosFragment"
+        android:label="Search Photos"
+        tools:layout="@layout/fragment_search_items" />
+    <fragment
+        android:id="@+id/curatedPhotos"
+        android:name="com.pexels.sample.photo.CuratedPhotosFragment"
+        android:label="Curated Photos"
+        tools:layout="@layout/fragment_handpicked_items" />
+</navigation>

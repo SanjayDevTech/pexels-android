@@ -4,7 +4,7 @@ import okhttp3.HttpUrl
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ServiceLocator {
+internal object ServiceLocator {
     fun pexelsService(url: HttpUrl): PexelsService {
         return Retrofit.Builder()
             .baseUrl(url)

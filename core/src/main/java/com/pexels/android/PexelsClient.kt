@@ -85,7 +85,13 @@ class PexelsClient (
         validatePage(page)
         validatePerPage(perPage)
         return operation.searchForPhotos(
-            query, orientation, size, color, locale, page, perPage,
+            query = query,
+            orientation = orientation,
+            size = size,
+            color = color,
+            locale = locale,
+            page = page,
+            perPage = perPage,
         )
     }
 
@@ -101,7 +107,13 @@ class PexelsClient (
     ): PexelsTask<ListPhotosResponse> {
         return executeCodeCallback {
             searchForPhotos(
-                query, orientation, size, color, locale, page, perPage
+                query = query,
+                orientation = orientation,
+                size = size,
+                color = color,
+                locale = locale,
+                page = page,
+                perPage = perPage,
             )
         }
     }
@@ -134,7 +146,8 @@ class PexelsClient (
         validatePage(page)
         validatePerPage(perPage)
         return operation.curatedPhotos(
-            page, perPage,
+            page = page,
+            perPage = perPage,
         )
     }
 
@@ -144,7 +157,10 @@ class PexelsClient (
         perPage: Int? = null,
     ): PexelsTask<ListPhotosResponse> {
         return executeCodeCallback {
-            curatedPhotos(page, perPage)
+            curatedPhotos(
+                page = page,
+                perPage = perPage,
+            )
         }
     }
 
@@ -167,7 +183,7 @@ class PexelsClient (
         id: Int,
     ): PhotoResource {
         return operation.getPhoto(
-            id,
+            id = id,
         )
     }
 
@@ -175,7 +191,7 @@ class PexelsClient (
         id: Int,
     ): PexelsTask<PhotoResource> {
         return executeCodeCallback {
-            getPhoto(id)
+            getPhoto(id = id)
         }
     }
     // PHOTO ENDS
@@ -238,7 +254,13 @@ class PexelsClient (
         validatePage(page)
         validatePerPage(perPage)
         return operation.searchForVideos(
-            query, orientation, size, color, locale, page, perPage,
+            query = query,
+            orientation = orientation,
+            size = size,
+            color = color,
+            locale = locale,
+            page = page,
+            perPage = perPage,
         )
     }
 
@@ -254,7 +276,13 @@ class PexelsClient (
     ): PexelsTask<ListVideosResponse> {
         return executeCodeCallback {
             searchForVideos(
-                query, orientation, size, color, locale, page, perPage
+                query = query,
+                orientation = orientation,
+                size = size,
+                color = color,
+                locale = locale,
+                page = page,
+                perPage = perPage,
             )
         }
     }
@@ -287,31 +315,43 @@ class PexelsClient (
      */
     @Throws(IllegalArgumentException::class, Exception::class, HttpException::class)
     suspend fun popularVideos(
-        page: Int? = null,
-        perPage: Int? = null,
         minWidth: Int? = null,
         minHeight: Int? = null,
         minDuration: Int? = null,
         maxDuration: Int? = null,
+        page: Int? = null,
+        perPage: Int? = null,
     ): ListVideosResponse {
         validatePage(page)
         validatePerPage(perPage)
         return operation.popularVideos(
-            page, perPage,
+            minWidth = minWidth,
+            minHeight = minHeight,
+            minDuration = minDuration,
+            maxDuration = maxDuration,
+            page = page,
+            perPage = perPage,
         )
     }
 
     @JvmOverloads
     fun popularVideosCallback(
-        page: Int? = null,
-        perPage: Int? = null,
         minWidth: Int? = null,
         minHeight: Int? = null,
         minDuration: Int? = null,
         maxDuration: Int? = null,
+        page: Int? = null,
+        perPage: Int? = null,
     ): PexelsTask<ListVideosResponse> {
         return executeCodeCallback {
-            popularVideos(page, perPage, minWidth, minHeight, minDuration, maxDuration)
+            popularVideos(
+                minWidth = minWidth,
+                minHeight = minHeight,
+                minDuration = minDuration,
+                maxDuration = maxDuration,
+                page = page,
+                perPage = perPage,
+            )
         }
     }
 
@@ -334,7 +374,7 @@ class PexelsClient (
         id: Int,
     ): VideoResource {
         return operation.getVideo(
-            id,
+            id = id,
         )
     }
 
@@ -342,7 +382,7 @@ class PexelsClient (
         id: Int,
     ): PexelsTask<VideoResource> {
         return executeCodeCallback {
-            getVideo(id)
+            getVideo(id = id)
         }
     }
     // VIDEO ENDS

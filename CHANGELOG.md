@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
+## [1.0.1] - 15/02/2022
+### Fixed
+- Mixed parameters in PexelsClient
+
 ## [1.0.0] - 15/02/2022
 ### Added
 - Video Functionality

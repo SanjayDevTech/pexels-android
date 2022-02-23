@@ -1,5 +1,5 @@
 # Pexels Android SDK
-[![](https://jitpack.io/v/CodeIt-With-Coffee/pexels-android.svg)](https://jitpack.io/#CodeIt-With-Coffee/pexels-android)
+[![](https://jitpack.io/v/SanjayDevTech/pexels-android.svg)](https://jitpack.io/#SanjayDevTech/pexels-android)
 
 ## Add to your project
 ### Step 1: Add the below line in your Project level build.gradle file
@@ -14,7 +14,7 @@ allprojects {
 
 ### Step 2: Add the below dependency
 ```gradle
-implementation 'com.github.CodeIt-With-Coffee.pexels-android:<tag>'
+implementation 'com.github.SanjayDevTech.pexels-android:<tag>'
 ```
 In the place of &lt;tag&gt; you can replace any [release](releases/) tag
 

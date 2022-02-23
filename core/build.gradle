@@ -33,7 +33,7 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                groupId = 'com.github.CodeIt-With-Coffee'
+                groupId = 'com.github.SanjayDevTech'
                 artifactId = 'pexels-android'
                 version = project.version
                 from components.release

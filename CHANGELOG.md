@@ -9,6 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
+## [1.0.2] - 23/02/2022
+### Changed
+- Transferred from [CodeIt-With-Coffee](https://github.com/CodeIt-With-Coffee) to
+[SanjayDevTech](https://github.com/SanjayDevTech)
+
 ## [1.0.1] - 15/02/2022
 ### Fixed
 - Mixed parameters in PexelsClient

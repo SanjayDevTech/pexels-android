@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
 
       - name: Ktlint check for code conventions
         run: ./gradlew ktlintCheck
@@ -19,3 +22,6 @@ jobs:
 
       - name: Assemble to debug
         run: ./gradlew assembleDebug
+
+      - run: pip install mkdocs mkdocs-material mkdocs-material-extensions pymdown-extensions mkdocs-minify-plugin 
+      - run: mkdocs gh-deploy --force

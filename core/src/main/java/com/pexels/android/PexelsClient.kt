@@ -435,7 +435,7 @@ class PexelsClient (
         if (page == null) return
         if (page < 1)
             throw IllegalArgumentException(
-                "page number should be greater than 0. Actual page number we got: $page"
+                "Page number should be greater than 0. Actual page number we got: $page"
             )
     }
 
@@ -443,7 +443,7 @@ class PexelsClient (
         if (perPage == null) return
         if (perPage !in 15 until 81)
             throw IllegalArgumentException(
-                "perPage should be in range 15 to 80(inclusive). Actual perPage we got: $perPage"
+                "Per Page should be in range 15 to 80(inclusive). Actual perPage we got: $perPage"
             )
     }
 

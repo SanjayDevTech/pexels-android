@@ -10,8 +10,9 @@ import okhttp3.HttpUrl
  * Main objective of this class is to create a Client
  */
 object Pexels {
+    private const val BASE_URL = "https://api.pexels.com"
 
-    private val service: PexelsService = ServiceLocator.pexelsService(HttpUrl.get("https://api.pexels.com"))
+    private val service: PexelsService = ServiceLocator.pexelsService(HttpUrl.get(BASE_URL))
 
     /**
      * Creates a [PexelsClient] with apiKey provided

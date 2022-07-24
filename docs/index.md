@@ -1,6 +1,6 @@
 # Pexels Android Library
 
-[![Pexels Android Library](docs/images/header.png)](docs/images/header.png)
+[![Pexels Android Library](images/header.png)](images/header.png)
 
 Pexels Android Library is a wrapper library for Pexels REST API. It handles all the network transactions and provides the data. It uses the popular Android Network client [Retrofit](https://square.github.io/retrofit/).
 
@@ -9,34 +9,32 @@ There are many community libraries for other frameworks and languages, but a few
 
 It uses Coroutines as its main weapon, but it also has support for Java devs too (by callback).
 
-<details>
-<summary>Kotlin</summary>
+=== "Kotlin"
 
-``` kotlin
-coroutineScope.launch {
-    try {
-        val response = pexelsClient.searchForPhotos("duck")
-    } catch (e: Exception) {
+    ``` kotlin
+    coroutineScope.launch {
+        try {
+            val response = pexelsClient.searchForPhotos("duck")
+        } catch (e: Exception) {
 
+        }
     }
-}
-```
-</details>
-<details>
-<summary>Java</summary>
+    ```
 
-``` java
-pexelsClient.searchForPhotosCallback("duck")
-    .setOnSuccessListener(response -> {
+=== "Java"
 
-    })
-    .setOnFailureListener(e -> {
+    ``` java
+    pexelsClient.searchForPhotosCallback("duck") // (1)
+        .setOnSuccessListener(response -> {
 
-    });
-```
-For every operation involves coroutines, suspend functions, there will be equivalent *Callback methods to support Java callers.
+        })
+        .setOnFailureListener(e -> {
 
-</details>
+        });
+    ```
+
+    1.  For every operation involves coroutines, suspend functions, there will be equivalent *Callback methods to support Java callers.
+
 
 ## Internal Dependencies
 - [Pexels](https://www.pexels.com/)

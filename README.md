@@ -14,9 +14,9 @@ allprojects {
 
 ### Step 2: Add the below dependency
 ```gradle
-implementation 'com.github.SanjayDevTech.pexels-android:<tag>'
+implementation 'com.github.SanjayDevTech.pexels-android:<version>'
 ```
-In the place of &lt;tag&gt; you can replace any [release](releases/) tag
+In the place of &lt;version&gt; you can replace any [release](releases/) tag
 
 Eg: 0.0.1
 

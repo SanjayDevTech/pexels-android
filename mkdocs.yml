@@ -6,6 +6,7 @@ nav:
   - Overview: index.md
   - Getting Started: getting-started.md
   - Guide: guide.md
+  - Changelog: changelog.md
 
 theme:
   name: material

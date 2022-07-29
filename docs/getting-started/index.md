@@ -1,4 +1,4 @@
-# Getting Started
+# Setup
 
 ## Build status
 [![](https://jitpack.io/v/SanjayDevTech/pexels-android.svg)](https://jitpack.io/#SanjayDevTech/pexels-android)
@@ -18,12 +18,11 @@ implementation 'com.github.SanjayDevTech.pexels-android:<version>' //(1)
 ```
 
 1.  In the place of &lt;version&gt; you can replace any [release](https://github.com/SanjayDevTech/pexels-android/releases/) tag
-    
     Eg: 0.0.1
 
 ## API Key
 Pexels service needs an API Key to work.
-Get an API key from their official website [Pexels](https://www.pexels.com/)
+Get an API key from their official website [Pexels](https://www.pexels.com/api/)
 
 ## Pexels client
 Use `Pexels` class to get a `PexelsClient`.
@@ -75,11 +74,11 @@ It requires the projects needs to be Java 11.
 
 
 ## BuildConfig (Optional)
-Since the API Keys can be extracted from public git repo, if it is used in code directly. I suggest to create secrets file and integrating into your projects.
+The API Keys can be extracted from public git repo, if it is used in code directly. I suggest to create secrets file and integrating into your projects.
 
 ### Secrets file
 Create a `secrets.properties` file in root of the project.
-Make sure you added the `secrets.properties` entry in `.gitignore`, so that it won't get exposed to public.
+Make sure you added the `secrets.properties` entry in `.gitignore`, so that it won't get committed to git repository.
 
 Paste the api key in `secrets.properties` file as:
 
@@ -140,3 +139,10 @@ This class will be generated after every successful gradle build.
     ```
 
     1. This shows error if the project hasn't been build yet.
+
+## Demo project
+I have created a demo project to demonstrate multiple ways to consume the Pexels Android Library.
+The sample app has been created as a `sample` module in the Pexels Android Library repository itself.
+
+Even though the sample is fully integrated, it will not contain any API Keys for the project.
+Follow the above [BuildConfig](#buildconfig-optional) method to add the API key.

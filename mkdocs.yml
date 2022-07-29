@@ -4,12 +4,16 @@ repo_name: SanjayDevTech/pexels-android
 
 nav:
   - Overview: index.md
-  - Getting Started: getting-started.md
+  - Getting Started:
+    - Setup: getting-started/index.md
+    - Images: getting-started/images.md
   - Guide: guide.md
   - Changelog: changelog.md
 
 theme:
   name: material
+  icon:
+    logo: material/view-gallery-outline
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default

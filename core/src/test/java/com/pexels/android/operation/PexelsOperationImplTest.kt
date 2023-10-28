@@ -34,7 +34,7 @@ class PexelsOperationImplTest {
     }
 
     @Test
-    fun searchForPhotos_serverReturns500_throwsHttpException() = runBlocking {
+    fun `Given Backend Says 500, When Search for Photos Then throws Http Exception`() = runBlocking {
         val response = MockResponse()
             .setResponseCode(500)
         mockWebServer.enqueue(response)
@@ -46,7 +46,7 @@ class PexelsOperationImplTest {
     }
 
     @Test
-    fun searchForPhotos_serverReturns400_throwsHttpException() = runBlocking {
+    fun `Given Backend Says 400, When Search for Photos Then throws Http Exception`() = runBlocking {
         val response = MockResponse()
             .setResponseCode(400)
         mockWebServer.enqueue(response)
@@ -58,7 +58,7 @@ class PexelsOperationImplTest {
     }
 
     @Test
-    fun searchForPhotos_serverReturns300_throwsHttpException() = runBlocking {
+    fun `Given Backend Says 300, When Search for Photos Then throws Http Exception`() = runBlocking {
         val response = MockResponse()
             .setResponseCode(300)
         mockWebServer.enqueue(response)
@@ -70,7 +70,7 @@ class PexelsOperationImplTest {
     }
 
     @Test
-    fun searchForPhotos_serverReturns200_throwsNoException() = runBlocking {
+    fun `Given Backend Says 200, When Search for Photos Then throws No Exception`() = runBlocking {
         val response = MockResponse()
             .setResponseCode(200)
             .setBody("{}")
@@ -83,7 +83,7 @@ class PexelsOperationImplTest {
     }
 
     @Test
-    fun searchForPhotos_serverShutdown_throwsException() = runBlocking {
+    fun `Given Backend Shutdown, When Search for Photos Then throws Exception`() = runBlocking {
         val response = MockResponse()
             .setResponseCode(200)
             .setBody("{}")

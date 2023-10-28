@@ -15,6 +15,7 @@ import com.pexels.android.model.video.VideoResource
 import com.pexels.android.operation.PexelsOperation
 import kotlinx.coroutines.*
 import retrofit2.HttpException
+import java.util.Objects
 
 /**
  * Client Class for Pexels API
@@ -95,16 +96,24 @@ class PexelsClient (
         )
     }
 
-    @JvmOverloads
+    /**
+     * This is intended for Java callers.
+     *
+     * See [searchForPhotos] for documentation
+     *
+     * @param query Required
+     * others are optional. null can be passed.
+     */
     fun searchForPhotosCallback(
         query: String,
-        orientation: Orientation? = null,
-        size: Size? = null,
-        color: String? = null,
-        locale: Locale? = null,
-        page: Int? = null,
-        perPage: Int? = null,
+        orientation: Orientation?,
+        size: Size?,
+        color: String?,
+        locale: Locale?,
+        page: Int?,
+        perPage: Int?,
     ): PexelsTask<ListPhotosResponse> {
+        Objects.requireNonNull(query, "query should not be null")
         return executeCodeCallback {
             searchForPhotos(
                 query = query,
@@ -151,10 +160,16 @@ class PexelsClient (
         )
     }
 
-    @JvmOverloads
+    /**
+     * This is intended for Java callers.
+     *
+     * See [curatedPhotos] for documentation
+     *
+     * all params are optional. null can be passed.
+     */
     fun curatedPhotosCallback(
-        page: Int? = null,
-        perPage: Int? = null,
+        page: Int?,
+        perPage: Int?,
     ): PexelsTask<ListPhotosResponse> {
         return executeCodeCallback {
             curatedPhotos(
@@ -187,9 +202,17 @@ class PexelsClient (
         )
     }
 
+    /**
+     * This is intended for Java callers.
+     *
+     * See [getPhoto] for documentation
+     *
+     * @param id Required
+     */
     fun getPhotoCallback(
         id: Int,
     ): PexelsTask<PhotoResource> {
+        Objects.requireNonNull(id, "id should not be null")
         return executeCodeCallback {
             getPhoto(id = id)
         }
@@ -264,16 +287,24 @@ class PexelsClient (
         )
     }
 
-    @JvmOverloads
+    /**
+     * This is intended for Java callers.
+     *
+     * See [searchForVideos] for documentation
+     *
+     * @param query Required
+     * others are optional. null can be passed.
+     */
     fun searchForVideosCallback(
         query: String,
-        orientation: Orientation? = null,
-        size: Size? = null,
-        color: String? = null,
-        locale: Locale? = null,
-        page: Int? = null,
-        perPage: Int? = null,
+        orientation: Orientation?,
+        size: Size?,
+        color: String?,
+        locale: Locale?,
+        page: Int?,
+        perPage: Int?,
     ): PexelsTask<ListVideosResponse> {
+        Objects.requireNonNull(query, "query should not be null")
         return executeCodeCallback {
             searchForVideos(
                 query = query,
@@ -334,14 +365,20 @@ class PexelsClient (
         )
     }
 
-    @JvmOverloads
+    /**
+     * This is intended for Java callers.
+     *
+     * See [popularVideos] for documentation
+     *
+     * all params are optional. null can be passed.
+     */
     fun popularVideosCallback(
-        minWidth: Int? = null,
-        minHeight: Int? = null,
-        minDuration: Int? = null,
-        maxDuration: Int? = null,
-        page: Int? = null,
-        perPage: Int? = null,
+        minWidth: Int?,
+        minHeight: Int?,
+        minDuration: Int?,
+        maxDuration: Int?,
+        page: Int?,
+        perPage: Int?,
     ): PexelsTask<ListVideosResponse> {
         return executeCodeCallback {
             popularVideos(
@@ -378,9 +415,17 @@ class PexelsClient (
         )
     }
 
+    /**
+     * This is intended for Java callers.
+     *
+     * See [getVideo] for documentation
+     *
+     * @param id Required
+     */
     fun getVideoCallback(
         id: Int,
     ): PexelsTask<VideoResource> {
+        Objects.requireNonNull(id, "id should not be null")
         return executeCodeCallback {
             getVideo(id = id)
         }

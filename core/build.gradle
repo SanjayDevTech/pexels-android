@@ -5,14 +5,23 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 34
 
     defaultConfig {
         minSdk 21
-        targetSdk 31
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+    }
+
+    namespace "com.pexels.android"
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
     }
 
     buildTypes {
@@ -33,7 +42,7 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                groupId = 'com.github.SanjayDevTech'
+                groupId = project.group
                 artifactId = 'pexels-android'
                 version = project.version
                 from components.release
@@ -43,10 +52,10 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2'
-    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1'
+    testImplementation 'androidx.arch.core:core-testing:2.2.0'
     testImplementation "com.google.truth:truth:1.1.3"
     testImplementation 'junit:junit:4.13.2'
     api 'com.squareup.retrofit2:retrofit:2.9.0'

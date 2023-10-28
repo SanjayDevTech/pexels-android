@@ -9,7 +9,7 @@ plugins {
 
 allprojects {
     group = "com.github.SanjayDevTech"
-    version = '1.0.2'
+    version = '1.0.3'
 }
 
 tasks.register('clean', Delete) {

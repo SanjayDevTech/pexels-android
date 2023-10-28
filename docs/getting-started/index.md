@@ -83,8 +83,9 @@ Make sure you added the `secrets.properties` entry in `.gitignore`, so that it w
 Paste the api key in `secrets.properties` file as:
 
 ``` properties title="secrets.properties"
-PEXELS_API_KEY=<apikey>
+PEXELS_API_KEY="<apikey>"
 ```
+Note: The key should be enclosed in double quotes.
 
 ### Extract key
 Define the below function `getApiKey()` in `app/build.gradle` file.
@@ -108,11 +109,11 @@ android {
     buildTypes {
         debug {
             // for debug
-            buildConfigField "String", "API_KEY", "\"${getApiKey()}\""
+            buildConfigField "String", "API_KEY", getApiKey() // This one is newly added
         }
         release {
             // for release
-            buildConfigField "String", "API_KEY", "\"${getApiKey()}\""
+            buildConfigField "String", "API_KEY", getApiKey() // This one is newly added
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

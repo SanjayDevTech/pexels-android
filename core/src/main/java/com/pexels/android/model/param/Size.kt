@@ -1,14 +1,15 @@
 package com.pexels.android.model.param
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+
 
 enum class Size {
-    @SerializedName("large")
+    @Json(name = "large")
     LARGE,
 
-    @SerializedName("medium")
+    @Json(name = "medium")
     MEDIUM,
 
-    @SerializedName("small")
+    @Json(name = "small")
     SMALL,
 }

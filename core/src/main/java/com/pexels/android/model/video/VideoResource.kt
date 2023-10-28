@@ -1,6 +1,6 @@
 package com.pexels.android.model.video
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 /**
  * VideoResource
@@ -30,10 +30,10 @@ data class VideoResource(
     val user: Photographer,
 
     /** An array of different sized versions of the video. **/
-    @SerializedName("video_files")
+    @Json(name = "video_files")
     val videoFiles: List<VideoFile>,
 
     /** An array of preview pictures of the video. **/
-    @SerializedName("video_pictures")
+    @Json(name = "video_pictures")
     val videoPictures: List<VideoPicture>,
 )

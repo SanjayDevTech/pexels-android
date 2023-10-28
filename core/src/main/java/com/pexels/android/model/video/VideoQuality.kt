@@ -1,10 +1,10 @@
 package com.pexels.android.model.video
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 enum class VideoQuality {
-    @SerializedName("hd")
+    @Json(name = "hd")
     HD,
-    @SerializedName("sd")
+    @Json(name = "sd")
     SD,
 }

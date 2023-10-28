@@ -1,14 +1,15 @@
 package com.pexels.android.model.param
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+
 
 enum class Orientation {
-    @SerializedName("landscape")
+    @Json(name = "landscape")
     LANDSCAPE,
 
-    @SerializedName("portrait")
+    @Json(name = "portrait")
     PORTRAIT,
 
-    @SerializedName("square")
+    @Json(name = "square")
     SQUARE,
 }

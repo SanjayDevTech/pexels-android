@@ -1,6 +1,7 @@
 package com.pexels.android.model.photo
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+
 
 /**
  * PhotoResource
@@ -36,19 +37,19 @@ data class PhotoResource(
     /**
      * The URL of the photographer's Pexels profile.
      */
-    @SerializedName("photographer_url")
+    @Json(name = "photographer_url")
     val photographerUrl: String,
 
     /**
      * The id of the photographer.
      */
-    @SerializedName("photographer_id")
+    @Json(name = "photographer_id")
     val photographerId: Int,
 
     /**
      * The average color of the photo. Useful for a placeholder while the image loads.
      */
-    @SerializedName("avg_color")
+    @Json(name = "avg_color")
     val avgColor: String,
 
     /**

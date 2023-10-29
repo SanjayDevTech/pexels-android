@@ -15,4 +15,6 @@ allprojects {
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
-tasks.withType(Jar).configureEach { duplicatesStrategy = DuplicatesStrategy.EXCLUDE }
+tasks.withType(Jar).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
-interface VideosPexelsService {
+internal interface VideosPexelsService {
     @GET("/videos/search")
     suspend fun searchForVideos(
         @Header("Authorization") apiKey: String,

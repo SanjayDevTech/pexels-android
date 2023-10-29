@@ -14,7 +14,11 @@ allprojects {
 ```
 
 ```groovy title="app/build.gradle"
-implementation 'com.github.SanjayDevTech.pexels-android:<version>' //(1)
+// Core module
+implementation 'com.github.SanjayDevTech.pexels-android:core:<version>' //(1)
+
+// Paging3 module (optional)
+implementation 'com.github.SanjayDevTech.pexels-android:paging3:<version>' //(1)
 ```
 
 1.  In the place of &lt;version&gt; you can replace any [release](https://github.com/SanjayDevTech/pexels-android/releases/) tag
@@ -97,7 +101,7 @@ static def getApiKey(){
         props.load(new FileInputStream(new File('secrets.properties')))
         return props['PEXELS_API_KEY']
     } catch(ignored) {
-        return ""
+        return "\"\""
     }
 }
 ```

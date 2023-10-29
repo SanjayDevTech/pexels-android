@@ -22,7 +22,7 @@ import java.util.Objects
  * @param operation
  * Instance of [PexelsOperation] to make the testing easier (Dependency Injection).
  */
-class PexelsClient (
+class PexelsClient internal constructor(
     private val operation: PexelsOperation,
 ) {
     private val job = Job()
@@ -321,10 +321,6 @@ class PexelsClient (
     /**
      * This endpoint enables you to receive the current popular Pexels videos.
      *
-     * @param page
-     * The page number you are requesting. `Default: 1`
-     * @param perPage
-     * The number of results you are requesting per page. `Default: 15` `Max: 80`
      * @param minWidth
      * The minimum width in pixels of the returned videos.
      * @param minHeight
@@ -333,6 +329,10 @@ class PexelsClient (
      * The minimum duration in seconds of the returned videos.
      * @param maxDuration
      * The maximum duration in seconds of the returned videos.
+     * @param page
+     * The page number you are requesting. `Default: 1`
+     * @param perPage
+     * The number of results you are requesting per page. `Default: 15` `Max: 80`
      *
      * @throws IllegalArgumentException
      * If any of the params were invalid
@@ -432,7 +432,7 @@ class PexelsClient (
     }
     // VIDEO ENDS
 
-    private fun <T> executeCodeCallback(code: suspend  () -> T): PexelsTask<T> {
+    private fun <T> executeCodeCallback(code: suspend () -> T): PexelsTask<T> {
         var onCompleteListener: OnCompleteListener<T>? = null
         var onSuccessListener: OnSuccessListener<T>? = null
         var onFailureListener: OnFailureListener? = null

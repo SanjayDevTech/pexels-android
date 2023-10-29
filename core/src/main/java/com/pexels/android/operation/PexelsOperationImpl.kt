@@ -17,7 +17,7 @@ import com.pexels.android.network.PexelsService
  * @param pexelsService
  * Retrofit Interface that actually makes the API calls
  */
-class PexelsOperationImpl(
+internal class PexelsOperationImpl(
     private val apiKey: String,
     private val pexelsService: PexelsService,
 ) : PexelsOperation {

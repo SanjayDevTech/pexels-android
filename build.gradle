@@ -9,9 +9,10 @@ plugins {
 
 allprojects {
     group = "com.github.SanjayDevTech.pexels-android"
-    version = '1.0.3'
+    version = '1.0.4'
 }
 
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
+tasks.withType(Jar).configureEach { duplicatesStrategy = DuplicatesStrategy.EXCLUDE }

@@ -49,7 +49,7 @@ For every operation involves coroutines, suspend functions, there will be equiva
 - Search Videos by query string
 
 ## Future
-- Paging3 module
+- Paging3 module (in-progress)
 
 ## License
 ```

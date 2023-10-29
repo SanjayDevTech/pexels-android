@@ -9,6 +9,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
+## [1.0.4] - 29/10/2023
+### Added
+- Setup Paging3 module
+
+### Changed
+- Splitted the library into 2 modules
+    - `core` - Core module with all the API calls
+    - `paging3` - Paging3 module
+
 ## [1.0.3] - 29/10/2023
 ### Changed
 - Project java version to 17

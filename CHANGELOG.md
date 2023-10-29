@@ -9,6 +9,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
+## [1.0.3] - 29/10/2023
+### Changed
+- Project java version to 17
+- Updated dependencies to latest version
+- Updated sample app to latest version
+- Moved Gson to Moshi converter
+- targetSdk and compileSdk to 34
+- Kotlin version to 1.9.10
+- Docs updated Build config section
+
 ## [1.0.2] - 23/02/2022
 ### Changed
 - Transferred from [CodeIt-With-Coffee](https://github.com/CodeIt-With-Coffee) to

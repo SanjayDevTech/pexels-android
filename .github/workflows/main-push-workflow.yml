@@ -8,20 +8,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v3
         with:
-          python-version: 3.x
+          java-version: '17'
+          distribution: 'temurin'
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
       - name: Ktlint check for code conventions
         run: ./gradlew ktlintCheck
 
-      - name: Run unit test in debug build
+      - name: Run unit test in release build
         id: testDebug
-        run: ./gradlew testDebugUnitTest
+        run: ./gradlew testReleaseUnitTest
 
-      - name: Assemble to debug
-        run: ./gradlew assembleDebug
+      - name: Assemble to release
+        run: ./gradlew assembleRelease
 
       - run: pip install mkdocs mkdocs-material mkdocs-material-extensions pymdown-extensions mkdocs-minify-plugin 
       - run: ./generate_docs.sh && mkdocs gh-deploy --force

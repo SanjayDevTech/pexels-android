@@ -42,8 +42,8 @@ Use `Pexels` class to get a `PexelsClient`.
     ```
 
 ## JVM compatibility
-It uses Java 11 as source and target compile versions.
-It requires the projects needs to be Java 11.
+It uses Java 17 as source and target compile versions.
+It requires the projects needs to be Java 17.
 
 === "Kotlin"
 
@@ -51,11 +51,11 @@ It requires the projects needs to be Java 11.
     android {
         //...
         compileOptions {
-            sourceCompatibility JavaVersion.VERSION_11
-            targetCompatibility JavaVersion.VERSION_11
+            sourceCompatibility JavaVersion.VERSION_17
+            targetCompatibility JavaVersion.VERSION_17
         }
         kotlinOptions {
-            jvmTarget = '11'
+            jvmTarget = '17'
         }
     }
     ```
@@ -66,8 +66,8 @@ It requires the projects needs to be Java 11.
     android {
         //...
         compileOptions {
-            sourceCompatibility JavaVersion.VERSION_11
-            targetCompatibility JavaVersion.VERSION_11
+            sourceCompatibility JavaVersion.VERSION_17
+            targetCompatibility JavaVersion.VERSION_17
         }
     }
     ```
@@ -85,7 +85,7 @@ Paste the api key in `secrets.properties` file as:
 ``` properties title="secrets.properties"
 PEXELS_API_KEY="<apikey>"
 ```
-Note: The key should be enclosed in double quotes.
+Note: The api key should be enclosed in double quotes.
 
 ### Extract key
 Define the below function `getApiKey()` in `app/build.gradle` file.

@@ -1,5 +1,7 @@
 package com.pexels.android.model.video
 
+import com.squareup.moshi.Json
+
 /**
  * Different size of [VideoResource]
  */
@@ -11,6 +13,7 @@ data class VideoFile(
     val quality: VideoQuality,
 
     /** The video format of the `video_file`. **/
+    @Json(name = "file_type")
     val fileType: String,
 
     /** The width of the `video_file` in pixels. **/

@@ -1,62 +1,62 @@
 package com.pexels.android.model.param
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 enum class Locale {
-    @SerializedName("en-US")
+    @Json(name = "en-US")
     EN_US,
-    @SerializedName("pt-BR")
+    @Json(name = "pt-BR")
     PT_BR,
-    @SerializedName("es-ES")
+    @Json(name = "es-ES")
     ES_ES,
-    @SerializedName("ca-ES")
+    @Json(name = "ca-ES")
     CA_ES,
-    @SerializedName("de-DE")
+    @Json(name = "de-DE")
     DE_DE,
-    @SerializedName("it-IT")
+    @Json(name = "it-IT")
     IT_IT,
-    @SerializedName("fr-FR")
+    @Json(name = "fr-FR")
     FR_FR,
-    @SerializedName("sv-SE")
+    @Json(name = "sv-SE")
     SV_SE,
-    @SerializedName("id-ID")
+    @Json(name = "id-ID")
     ID_ID,
-    @SerializedName("pl-PL")
+    @Json(name = "pl-PL")
     PL_PL,
-    @SerializedName("ja-JP")
+    @Json(name = "ja-JP")
     JA_JP,
-    @SerializedName("zh-TW")
+    @Json(name = "zh-TW")
     ZH_TW,
-    @SerializedName("zh-CN")
+    @Json(name = "zh-CN")
     ZH_CN,
-    @SerializedName("ko-KR")
+    @Json(name = "ko-KR")
     KO_KR,
-    @SerializedName("th-TH")
+    @Json(name = "th-TH")
     TH_TH,
-    @SerializedName("nl-NL")
+    @Json(name = "nl-NL")
     NL_NL,
-    @SerializedName("hu-HU")
+    @Json(name = "hu-HU")
     HU_HU,
-    @SerializedName("vi-VN")
+    @Json(name = "vi-VN")
     VI_VN,
-    @SerializedName("cs-CZ")
+    @Json(name = "cs-CZ")
     CS_CZ,
-    @SerializedName("da-DK")
+    @Json(name = "da-DK")
     DA_DK,
-    @SerializedName("fi-FI")
+    @Json(name = "fi-FI")
     FI_FI,
-    @SerializedName("uk-UA")
+    @Json(name = "uk-UA")
     UK_UA,
-    @SerializedName("el-GR")
+    @Json(name = "el-GR")
     EL_GR,
-    @SerializedName("ro-RO")
+    @Json(name = "ro-RO")
     RO_RO,
-    @SerializedName("nb-NO")
+    @Json(name = "nb-NO")
     NB_NO,
-    @SerializedName("sk-SK")
+    @Json(name = "sk-SK")
     SK_SK,
-    @SerializedName("tr-TR")
+    @Json(name = "tr-TR")
     TR_TR,
-    @SerializedName("ru-RU")
+    @Json(name = "ru-RU")
     RU_RU,
 }

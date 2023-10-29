@@ -18,10 +18,12 @@ allprojects {
 implementation 'com.github.SanjayDevTech.pexels-android:core:<version>' //(1)
 
 // Paging3 module (optional)
-implementation 'com.github.SanjayDevTech.pexels-android:paging3:<version>' //(1)
+implementation 'com.github.SanjayDevTech.pexels-android:paging3:<version>' //(2)
 ```
 
 1.  In the place of &lt;version&gt; you can replace any [release](https://github.com/SanjayDevTech/pexels-android/releases/) tag
+    Eg: 0.0.1
+2.  In the place of &lt;version&gt; you can replace any [release](https://github.com/SanjayDevTech/pexels-android/releases/) tag
     Eg: 0.0.1
 
 ## API Key

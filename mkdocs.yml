@@ -6,7 +6,8 @@ nav:
   - Overview: index.md
   - Getting Started:
     - Setup: getting-started/index.md
-    - Images: getting-started/images.md
+    - Core: getting-started/core.md
+    - Paging 3: getting-started/paging3.md
   - Guide: guide.md
   - Changelog: changelog.md
 

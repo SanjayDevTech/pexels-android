@@ -17,6 +17,12 @@ jobs:
       - name: Ktlint check for code conventions
         run: ./gradlew ktlintCheck
 
+      - name: Setup API Key
+        run:
+          - cat >> secrets.properties << EOF
+          - PEXELS_API_KEY="${{ secrets.PEXELS_API_KEY }}"
+          - EOF
+
       - name: Run unit test in release build
         id: testDebug
         run: ./gradlew testReleaseUnitTest

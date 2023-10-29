@@ -13,7 +13,7 @@ import com.pexels.android.model.photo.ListPhotosResponse
  * Making separate interface for each resource (Photo, Video, etc.) will make
  * development easier and prevents frustration while finding the right methods.
  */
-interface PhotosOperation {
+internal interface PhotosOperation {
     suspend fun searchForPhotos(
         query: String,
         orientation: Orientation? = null,

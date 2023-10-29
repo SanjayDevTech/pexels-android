@@ -15,7 +15,7 @@ import com.pexels.android.model.video.VideoResource
  * Making separate interface for each resource (Photo, Video, etc.) will make
  * development easier and prevents frustration while finding the right methods.
  */
-interface VideosOperation {
+internal interface VideosOperation {
     suspend fun searchForVideos(
         query: String,
         orientation: Orientation? = null,

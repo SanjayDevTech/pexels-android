@@ -10,7 +10,7 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface PhotosPexelsService {
+internal interface PhotosPexelsService {
     @GET("/v1/search")
     suspend fun searchForPhotos(
         @Header("Authorization") apiKey: String,
